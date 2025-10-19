@@ -11,29 +11,29 @@ usbipd attach --wsl --busid [BUSID]
 usbipd list
 ```
 
-1-2. wsl側で/dev/ttyUSB*の接続を確認
+1-2. wsl側で/dev/ttyACM*の接続を確認
 
 ```bash
-ls /dev/ttyUSB*
+ls /dev/ttyACM*
 ```
 
-1-3. wsl側でsocatを使って/dev/ttyUSB*を中継
+1-3. wsl側でsocatを使って/dev/ttyACM*を中継
 
 ```bash
-sudo socat -d -d TCP4-LISTEN:2001,reuseaddr,fork FILE:/dev/ttyUSB0,raw,echo=0,b115200
+sudo socat -d -d TCP4-LISTEN:2001,reuseaddr,fork FILE:/dev/ttyACM0,raw,echo=0,b115200
 
 ```
 
-1-4. dockerコンテナ側でsocatを使って/dev/ttyUSB*を受信
+1-4. dockerコンテナ側でsocatを使って/dev/ttyACM*を受信
 
 ```bash
 docker ps -a
 docker start [CONTAINER ID or NAME]
 docker ps -a
 docker exec -it [CONTAINER ID or NAME] bash
-socat -d -d PTY,link=/dev/ttyUSB0,raw,echo=0 TCP:host.docker.internal:2001
+socat -d -d PTY,link=/dev/ttyACM0,raw,echo=0 TCP:host.docker.internal:2001
 ```
-1-5. 他のタブでdockerコンテナを開き/dev/ttyUSB*の受信確認
+1-5. 他のタブでdockerコンテナを開き/dev/ttyACM*の受信確認
 
 1-6. dockerコンテナ側でimuノードのros2 runする
 
