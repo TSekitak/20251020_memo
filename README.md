@@ -43,3 +43,18 @@ colcon build
 source install/setup.bash
 ros2 run
 ```
+#### /dev/ttyUSB*と/dev/ttyACM*の違い
+
+- ドライバ層と通信方式の違い
+
+要約比較表
+
+| 項目     | `/dev/ttyUSB*`      | `/dev/ttyACM*`        |
+| ------ | ------------------- | --------------------- |
+| 主な用途   | USB–UART変換          | USB CDC(仮想COMポート)     |
+| ドライバ   | usbserial系          | cdc_acm               |
+| 主なデバイス | FTDI, CP210x, CH340 | Arduino, STM32, Modem |
+| 通信層    | UARTレベル             | USB CDCクラス            |
+| 認識方法   | ベンダ固有ドライバ           | 標準クラスドライバ             |
+| 例      | `/dev/ttyUSB0`      | `/dev/ttyACM0`        |
+
