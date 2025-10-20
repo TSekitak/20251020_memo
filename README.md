@@ -43,8 +43,13 @@ socat -d -d PTY,link=/dev/ttyUSB0,raw,echo=0 TCP:host.docker.internal:2001
 cd ~/[ROS2_WORKSPACE]
 colcon build
 source install/setup.bash
-ros2 run
+ros2 run ic110r_nodes imu_node
 ```
+1-7. 実行結果の確認
+
+実行したが何も表示されない。
+
+cat /dev/ttyUSB0にはバイナリデータが表示されることは確認できたが。
 #### /dev/ttyUSB*と/dev/ttyACM*の違い
 
 - ドライバ層と通信方式の違い
